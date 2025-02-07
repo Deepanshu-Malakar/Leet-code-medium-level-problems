@@ -28,15 +28,17 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        count=0
-        max_length=0
-        # greatest_substring=[]
-        for i in range(0,len(s)):
-            j=i
-            while(j<len(s)-1 and s[j]!=s[j+1]):
-                j=j+1
-            
-            if(max_length<i-j+1):
-                max_length=i-j+1
-                # greatest_substring.append(s[i:j+1])
-        return max_length
+        start=0
+        end=0
+        maxlen=0
+        set_array=[]
+        while(end<len(s)):
+            if(s[end] in set_array):
+                start+=1
+                set_array.remove(s[start-1])
+            else:
+                set_array.append(s[end])
+                end+=1
+            if(end - start >maxlen):
+                maxlen=end-start
+        return maxlen
